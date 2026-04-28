@@ -1,38 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>RoboThumb AI</title>
+    <title>ThumbForge AI</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body style="text-align:center; font-family:sans-serif;">
+<body>
 
-<h1>RoboThumb AI</h1>
+<div class="box">
 
-<input id="prompt" placeholder="z.B. epic roblox thumbnail"/>
-<button onclick="generate()">Generate</button>
+    <h1>🎮 ThumbForge AI</h1>
+    <p>Roblox Thumbnail Generator</p>
 
-<br><br>
-<img id="img" width="400"/>
+    <input id="prompt" placeholder="Describe your Roblox scene..." />
 
-<script>
-async function generate() {
-    const prompt = document.getElementById("prompt").value;
+    <button onclick="generate()">Generate</button>
 
-    const res = await fetch("https://api.openai.com/v1/images/generations", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer DEIN_API_KEY"
-        },
-        body: JSON.stringify({
-            prompt: "roblox thumbnail " + prompt,
-            size: "1024x1024"
-        })
-    });
+    <div class="output">
+        <img id="result" />
+    </div>
 
-    const data = await res.json();
-    document.getElementById("img").src = data.data[0].url;
-}
-</script>
+</div>
 
+<script src="app.js"></script>
 </body>
 </html>
