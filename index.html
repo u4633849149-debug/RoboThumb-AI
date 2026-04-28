@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RoboThumb AI</title>
+</head>
+<body style="text-align:center; font-family:sans-serif;">
+
+<h1>RoboThumb AI</h1>
+
+<input id="prompt" placeholder="z.B. epic roblox thumbnail"/>
+<button onclick="generate()">Generate</button>
+
+<br><br>
+<img id="img" width="400"/>
+
+<script>
+async function generate() {
+    const prompt = document.getElementById("prompt").value;
+
+    const res = await fetch("https://api.openai.com/v1/images/generations", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer DEIN_API_KEY"
+        },
+        body: JSON.stringify({
+            prompt: "roblox thumbnail " + prompt,
+            size: "1024x1024"
+        })
+    });
+
+    const data = await res.json();
+    document.getElementById("img").src = data.data[0].url;
+}
+</script>
+
+</body>
+</html>
